@@ -1,0 +1,32 @@
+{
+  "inputs": [
+    {
+      "name": "k",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "h",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "c",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "p",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "g",
+      "public": true,
+      "type": "field"
+    }
+  ],
+  "output": {
+    "type": "bool"
+  }
+}

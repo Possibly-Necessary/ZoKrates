@@ -1,0 +1,16 @@
+{
+  "inputs": [
+    {
+      "name": "k",
+      "public": false,
+      "type": "field"
+    }
+  ],
+  "output": {
+    "type": "array",
+    "components": {
+      "size": 5,
+      "type": "field"
+    }
+  }
+}

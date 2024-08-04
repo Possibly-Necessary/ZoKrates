@@ -1,0 +1,44 @@
+
+import "/home/arthur-merlin/.zokrates/stdlib/utils/casts/u8_from_bits" as u8_from_bits;
+import "/home/arthur-merlin/.zokrates/stdlib/utils/casts/u8_to_bits" as u8_to_bits;
+import "/home/arthur-merlin/.zokrates/stdlib/utils/pack/bool/unpack" as unpack;
+import "/home/arthur-merlin/.zokrates/stdlib/hashes/poseidon/poseidon" as poseidon;
+const u32 FIELD_SIZE_IN_BITS = 254;
+
+def main(private field k) -> field[5] {
+
+    // Unpacking k into bits 
+    bool[FIELD_SIZE_IN_BITS] bits_of_k = unpack(k);
+
+    // Compute the Poseidon hash of k
+    field h = poseidon([k]);
+
+    // Define the generator g
+    field g = 7;
+
+    // Initialize c for repeated squaring 
+    field mut c = 1;
+    field mut base = g;
+
+    // Exponentiation using bits
+    for u32 i in 0..FIELD_SIZE_IN_BITS {
+        c = if bits_of_k[i] { c * base } else { c };
+        base = base * base;
+    }
+
+    // Polynomial computation: 5k^3 + 2k^2 + k + 3
+    field computed_p = 5 * k * k * k + 2 * k * k + k + 3;
+
+    // Return computed values
+    return [k, h, c, g, computed_p];
+}
+
+/* 
+    Compiling this proof will result in 1238 number of constraints. 
+    For witness computation using the private input k = 167, the output (the return values will return)
+    the following:
+
+    Witness:
+    ["167","13432747890427498375149439507741491713221934456011451209707589675527438237343","18984888164746760677248854498399796129086997644530529352716064491891774749895","7","23343263"]
+
+*/
