@@ -1,7 +1,8 @@
 
 // ZK Circuit for the statement: prover has knowledge of k s.t h = Hash(k), c = g^k mod p, and p = 5k^3 + 2k^2 + k + 3
 // This proof compiles to a circuit with 1744 constraints
-// To compute witness, type: zokrates compute-witness -a 167 13432747890427498375149439507741491713221934456011451209707589675527438237343 18984888164746760677248854498399796129086997644530529352716064491891774749895 23343263 7
+// To compute witness, type: 
+// zokrates compute-witness -a 167 13432747890427498375149439507741491713221934456011451209707589675527438237343 18984888164746760677248854498399796129086997644530529352716064491891774749895 23343263 7
 // Witness computed is [1]
 
 // Proof size: 2 KB
@@ -37,13 +38,12 @@ def main(private field k, public field h, public field c, public field p, public
         base = base * base;
     }
 
-    // Assert that the computed commitmit matches the public one
+    // Assert that the computed commitment matches the public one
     assert(cmt == c); 
 
     // Polynomial computation: 5k^3 + 2k^2 + k + 3
     field poly = 5 * k * k * k + 2 * k * k + k + 3;
     assert(poly == p);
 
-    // Return true if all computations check out
     return true; 
 }
